@@ -1,17 +1,5 @@
 # Projeto P1
 
-Membros do grupo:
-
-* Gabriel Monteiro
-
-* Angel Willyan
-
-* Antônio Lins
-
-* João Lucas
-
-* Lucas de Castro
-
 * Lucas Gabriel
 
   ------
