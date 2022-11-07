@@ -8,7 +8,7 @@
 
  * Instale o Python 3.6 ou superior
  * Instale a biblioteca pygame
- * Instale a biblioteca sys
- * Instale a biblioteca random
+ * Importe a biblioteca sys
+ * Importe a biblioteca random
  * Clone o repositório do projeto
  * execute jogo.py
