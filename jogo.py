@@ -3,14 +3,13 @@ from pygame.locals import *
 from sys import exit
 from random import randint
 
-
 pygame.init()
 
 # criando tela
 largura = 600
 altura = 600
 tela = pygame.display.set_mode((largura, altura))
-pygame.display.set_caption('QUADRADIN')
+pygame.display.set_caption('QUADRADINHO COLETOR')
 
 # variaveis iniciais
 cianos = vermelhos = verdes = 0
@@ -24,8 +23,8 @@ y_controle = 0
 controlex_vilao = 0
 controley_vilao = 0
 lista_coletaveis = []
-cor_tela = (0,0,0)
-cor_gameover = (255,0,0)
+cor_tela = (0, 0, 0)
+cor_gameover = (255, 0, 0)
 
 relogio = pygame.time.Clock()
 fonte = pygame.font.SysFont('arial', 25, bold=True, italic=True)
@@ -33,7 +32,6 @@ fonte2 = pygame.font.SysFont('arial', 18, bold=True, italic=False)
 fonte_placar = pygame.font.SysFont('arial', 15, True, False)
 fonte_vantagens = pygame.font.SysFont('arial', 22, bold=True, italic=False)
 fonte_gameover = pygame.font.SysFont('franklingothicmedium', 50, bold=True, italic=False)
-
 
 
 class Player:
@@ -56,21 +54,21 @@ class Player:
         if event.key == K_DOWN:
             x_controle = 0
             y_controle = velocidade
-        if player.pos_x > largura-20:
+        if player.pos_x > largura - 20:
             player.pos_x = 0
         if player.pos_x < 0:
             player.pos_x = largura
-        if player.pos_y > altura-20:
+        if player.pos_y > altura - 20:
             player.pos_y = 0
         if player.pos_y < 0:
             player.pos_y = altura
 
     def colidiu(self, coletavel):
         global Coletaveis, cianos, vermelhos, verdes, velocidade, imortal, cor_tela, vivo
-        if coletavel.centro_x -30 <   player.pos_x < coletavel.centro_x + 10:
-            if coletavel.centro_y - 30 <  player. pos_y < coletavel.centro_y + 10:
-                coletavel.centro_x = randint(0,largura-10)
-                coletavel.centro_y = randint(51,altura-10)
+        if coletavel.centro_x - 30 < player.pos_x < coletavel.centro_x + 10:
+            if coletavel.centro_y - 30 < player.pos_y < coletavel.centro_y + 10:
+                coletavel.centro_x = randint(0, largura - 10)
+                coletavel.centro_y = randint(51, altura - 10)
                 if coletavel == vermelho:
                     vermelhos += 1
                     velocidade += 3
@@ -80,7 +78,7 @@ class Player:
                 if coletavel == ciano:
                     cianos += 1
                     imortal = True
-                    cor_tela = (255,255,255)
+                    cor_tela = (255, 255, 255)
                 if coletavel == verde:
                     verdes += 1
                     if velocidade > 3:
@@ -89,9 +87,11 @@ class Player:
                         vivo = False
                     if imortal == True:
                         imortal = False
-                        cor_tela = (0,0,0)
+                        cor_tela = (0, 0, 0)
+
     def desenhar(self):
-        pygame.draw.rect(tela, (0,0,255), (self.pos_x, self.pos_y, 25, 25))
+        pygame.draw.rect(tela, (0, 0, 255), (self.pos_x, self.pos_y, 25, 25))
+
 
 class Coletaveis:
     def __init__(self, cor, centro_x, centro_y, raio):
@@ -102,6 +102,7 @@ class Coletaveis:
 
     def desenhar_coletaveis(self):
         pygame.draw.circle(tela, self.cor, (self.centro_x, self.centro_y), self.raio)
+
 
 class Vilao():
     def __init__(self, cor, pos_x, pos_y):
@@ -125,9 +126,10 @@ class Vilao():
         if self.pos_y > player.pos_y:
             controley_vilao = -velocidade_vilao
 
-        if player.pos_x - 20 < self.pos_x < player.pos_x + 25 and not imortal :
+        if player.pos_x - 20 < self.pos_x < player.pos_x + 25 and not imortal:
             if player.pos_y - 20 < self.pos_y < player.pos_y + 25:
                 vivo = False
+
 
 def reiniciar_jogo():
     global cianos, vermelhos, verdes, vivo, imoral, velocidade, velocidade_vilao, imortal, x_controle, y_controle
@@ -141,18 +143,20 @@ def reiniciar_jogo():
     y_controle = 0
     controlex_vilao = 0
     controley_vilao = 0
-    player.pos_x = largura//2
-    player.pos_y = altura//2
-    inimigo.pos_x = largura-20
-    inimigo.pos_y = altura-20
+    player.pos_x = largura // 2
+    player.pos_y = altura // 2
+    inimigo.pos_x = largura - 20
+    inimigo.pos_y = altura - 20
+
+
 menu = True
 while menu:
     tela.fill((0, 0, 0))
 
-    mensagem = ('Seja Bem-Vindo(a) ao Nosso Jogo!')   # Mensagem de Bem-Vindo
-    texto_formatado4 = fonte.render(mensagem, True, (255, 255, 0))
-    tela.blit(texto_formatado4, (90, altura / 7))
-    inicio = ('Pressione a BARRA DE ESPAÇO para iniciar')    # Iniciar Jogo
+    mensagem = ('Seja Bem-Vindo(a) ao Quadradinho Coletor!')  # Mensagem de Bem-Vindo
+    texto_formatado4 = fonte.render(mensagem, True, (0, 255, 255))
+    tela.blit(texto_formatado4, (40, altura / 7))
+    inicio = ('Pressione a BARRA DE ESPAÇO para iniciar')  # Iniciar Jogo
     texto_formatado3 = fonte.render(inicio, True, (255, 255, 255))
     tela.blit(texto_formatado3, (35, altura / 2.2))
     poderes_coletaveis = ('||||||  Efeitos  ||||||')  # Mostra as vantagens dos coletáveis
@@ -168,7 +172,6 @@ while menu:
     texto_formatado7 = fonte2.render(pontuacao3, True, (255, 0, 0))
     tela.blit(texto_formatado7, (15, altura / 1.13))
 
-
     pygame.display.update()
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -179,11 +182,11 @@ while menu:
 
     pygame.display.update()
 
-player = Player((0,0,255), largura//2, altura//2 )
-inimigo = Vilao((255, 255, 0), largura-20, altura-20 )
-vermelho = Coletaveis((255, 0, 0), randint(0, largura - 30), randint(0,altura - 30), 5)
-ciano = Coletaveis((0, 255, 255), randint(0, largura - 30), randint(0,altura - 30), 5)
-verde = Coletaveis((0, 255, 0), randint(0, largura - 30), randint(0,altura - 30), 5)
+player = Player((0, 0, 255), largura // 2, altura // 2)
+inimigo = Vilao((255, 255, 0), largura - 20, altura - 20)
+vermelho = Coletaveis((255, 0, 0), randint(0, largura - 30), randint(0, altura - 30), 5)
+ciano = Coletaveis((0, 255, 255), randint(0, largura - 30), randint(0, altura - 30), 5)
+verde = Coletaveis((0, 255, 0), randint(0, largura - 30), randint(0, altura - 30), 5)
 lista_coletaveis.append(ciano)
 lista_coletaveis.append(vermelho)
 lista_coletaveis.append(verde)
@@ -232,7 +235,7 @@ while True:
             vivo = False
             campeao = True
             gameover = ('Você ganhou!!!')
-            cor_gameover = (0,0,255)
+            cor_gameover = (0, 255, 0)
     if not vivo:
         tela.fill((0, 0, 0))
         if not campeao:
@@ -241,8 +244,7 @@ while True:
         sair = ('Pressione "ESC" para sair')
         texto_formatado1 = fonte_gameover.render(gameover, True, cor_gameover, True)
         texto_formatado2 = fonte.render(reset, True, (255, 255, 255), True)
-        texto_formatado3 = fonte2.render(sair, True, (0, 255, 0), True)
-
+        texto_formatado3 = fonte2.render(sair, True, (255, 255, 0), True)
 
         tela.blit(texto_formatado1, (130, altura // 6))
         tela.blit(texto_formatado2, (20, altura // 2))
